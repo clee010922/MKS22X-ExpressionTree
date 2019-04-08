@@ -50,8 +50,9 @@ private char op;
   /*return the expression as an infix notation string with parenthesis*/
   /* The sample tree would be: "(3 + (2 * 10))"     */
   public String toString(){
-    /*you are to write this method*/
-    return "";
+    if (isValue())
+      return getValue() + "";
+    else return "(" + getLeft().toString() + " " + getOp() + " " + getRight().toString() + ")";
   }
 
   /*return the expression as a postfix notation string without parenthesis*/
@@ -59,7 +60,7 @@ private char op;
   public String toStringPostfix(){
     if (isValue())
       return getValue() + "";
-    else return getLeft().toString() + " " + getRight().toString() + " " + getOp();
+    else return getLeft().toStringPostfix() + " " + getRight().toStringPostfix() + " " + getOp();
   }
 
   /*return the expression as a prefix notation string without parenthesis*/
@@ -68,7 +69,7 @@ private char op;
   public String toStringPrefix(){
     if (isValue())
       return getValue() + "";
-    else return getOp() + " " + getLeft().toString() + " " + getRight().toString();
+    else return getOp() + " " + getLeft().toStringPrefix() + " " + getRight().toStringPrefix();
   }
 
   /*return the value of the specified expression tree*/
